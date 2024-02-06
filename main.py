@@ -16,7 +16,7 @@ st.sidebar.title("Restaurant Bill Estimator")
 # Menambahkan emoticon restaurant berukuran besar pada sidebar
 st.sidebar.markdown('<div style="text-align:center"><img src="https://emojicdn.elk.sh/🍽" width="150" height="150">', unsafe_allow_html=True)
 
-page = st.sidebar.selectbox("Select Page", ["Tools", "Dataset", "Summary"])
+page = st.sidebar.selectbox("Select Page", ["Tools","Information", "Dataset", "Summary"])
 
 if page == "Tools":
 
@@ -27,6 +27,8 @@ if page == "Tools":
 
     # Penjelasan singkat tentang alat pada sidebar
     st.sidebar.markdown("This tool helps estimate restaurant bills based on various factors.")
+
+    st.markdown("This tool will analysed the time spent and bill amount relationship of customers in the restaurant. It applied 12 ML, and 1 ANN model and deployed them on Streamlit.")
 
     # Pilihan fitur contoh
     # Splitting the input fields into two columns
@@ -111,13 +113,45 @@ if page == "Tools":
     st.success("Estimated Invoice Amount with XGBoost Model:   ${:.2f}".format(int(xgb_prediction[0])))
     st.success("Estimated Invoice Amount with ANN Model:   ${:.2f}".format(int(ann_prediction[0][0])))
 
+elif page == "Information":
+    st.header("Information")
+
+    # Penjelasan singkat tentang alat pada sidebar
+    st.sidebar.markdown("This page provides an explanation of the dataset used in the analysis. It includes information about the features and their meanings.")
+    
+    st.markdown("Descriptive Statistics")
+                
+    st.image('img/outlier_check.png', caption='Outliers Check', width=500, use_column_width=True)
+    
+
+    # Splitting the input fields into two columns
+    col1, col2 = st.columns(2)
+
+    # Column 1
+    with col1:
+        st.image('img/pairplot.png', caption='Pairplot', width=350, use_column_width=True)
+        st.image('img/scatterplot.png', caption='On days with live music, individuals tend to spend more on their bills.', width=350, use_column_width=True)
+        st.image('img/correlation.png', caption='Correlation', width=350, use_column_width=True)
+    
+
+    # Column 2
+    with col2:
+        st.image('img/barchart.png', caption='Bar Charts', width=350, use_column_width=True)
+        st.image('img/scatterplot_timespend_billamount.png', caption='As the time spent by customers in the restaurant increases, the amount they spend on their bills also tends to increase.', width=350, use_column_width=True)
+    
+    
+    
 elif page == "Dataset":
     st.header("Dataset Explanation")
 
     # Penjelasan singkat tentang alat pada sidebar
     st.sidebar.markdown("This page provides an explanation of the dataset used in the analysis. It includes information about the features and their meanings.")
     
-    st.markdown('<div style="text-align:center"><img src="https://emojicdn.elk.sh/📊" width="200" height="200"></div>', unsafe_allow_html=True)
+    df = pd.read_csv("data/restaurant_data.csv")
+
+        # Menampilkan head dari DataFrame
+    st.write("Restaurant Data:")
+    st.write(df.head())
 
     st.markdown("""
     
