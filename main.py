@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_extras.stylable_container import stylable_container
 import pandas as pd
 import pickle
 from tensorflow.keras.models import load_model
@@ -11,10 +12,12 @@ st.set_page_config(page_title="Restaurant Bill Estimator", page_icon=":fork_and_
 
 st.title("Restaurant Bill Estimator")
 
-st.sidebar.title("Restaurant Bill Estimator")
+st.image('img/cctv.png', width=350, use_column_width=True)
 
 # Menambahkan emoticon restaurant berukuran besar pada sidebar
 st.sidebar.markdown('<div style="text-align:center"><img src="https://emojicdn.elk.sh/🍽" width="150" height="150">', unsafe_allow_html=True)
+
+st.sidebar.title("SIDEBAR")
 
 page = st.sidebar.selectbox("Select Page", ["Tools","Information", "Dataset", "Summary"])
 
@@ -117,7 +120,7 @@ elif page == "Information":
     st.header("Information")
 
     # Penjelasan singkat tentang alat pada sidebar
-    st.sidebar.markdown("This page provides an explanation of the dataset used in the analysis. It includes information about the features and their meanings.")
+    st.sidebar.markdown("This page provides an overview of the analysis conducted on the restaurant dataset. It includes descriptive statistics and visualizations to explore various aspects of the data.")
     
     st.markdown("Descriptive Statistics")
                 
