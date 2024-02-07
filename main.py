@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_extras.stylable_container import stylable_container
 import pandas as pd
 import pickle
 from tensorflow.keras.models import load_model
